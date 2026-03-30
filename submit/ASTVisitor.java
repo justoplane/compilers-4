@@ -1,5 +1,6 @@
 package submit;
 
+import org.antlr.v4.codegen.model.decl.Decl;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.CminusBaseVisitor;
@@ -26,34 +27,31 @@ public class ASTVisitor extends CminusBaseVisitor<Node> {
     @Override public Node visitProgram(CminusParser.ProgramContext ctx) {
         symbolTable = new SymbolTable();
         List<Declaration> decls = new ArrayList<>();
-//        for (CminusParser.DeclarationContext d : ctx.declaration()) {
-//            decls.add((Declaration) visitDeclaration(d));
-//        }
+        for (CminusParser.DeclarationContext d : ctx.declaration()) {
+            decls.add((Declaration) visitDeclaration(d));
+        }
         return new Program(decls);
     }
 
     @Override public Node visitVarDeclaration(CminusParser.VarDeclarationContext ctx) {
+        VarType type = getVarType(ctx.typeSpecifier());
+        List<String> ids = new ArrayList<>();
+        List<Integer> arraySizes = new ArrayList<>();
+
         for (CminusParser.VarDeclIdContext v : ctx.varDeclId()) {
             String id = v.ID().getText();
-            LOGGER.fine("Var ID: " + id);
-        }
-        return null;
+            ids.add(id);
 
-//        VarType type = getVarType(ctx.typeSpecifier());
-//        List<String> ids = new ArrayList<>();
-//        List<Integer> arraySizes = new ArrayList<>();
-//        for (CminusParser.VarDeclIdContext v : ctx.varDeclId()) {
-//            String id = v.ID().getText();
-//            ids.add(id);
-//            symbolTable.addSymbol(id, new SymbolInfo(id, type, false));
-//            if (v.NUMCONST() != null) {
-//                arraySizes.add(Integer.parseInt(v.NUMCONST().getText()));
-//            } else {
-//                arraySizes.add(-1);
-//            }
-//        }
-//        final boolean isStatic = false;
-//        return new VarDeclaration(type, ids, arraySizes, isStatic);
+            symbolTable.addSymbol(id, new SymbolInfo(id, type, false));
+
+            if (v.NUMCONST() != null) {
+                arraySizes.add(Integer.parseInt(v.NUMCONST().getText()));
+            } else {
+                arraySizes.add(-1);
+            }
+        }
+        final boolean isStatic = false;
+        return new VarDeclaration(type, ids, arraySizes, isStatic);
     }
 
 //    @Override public Node visitReturnStmt(CminusParser.ReturnStmtContext ctx) {
@@ -78,13 +76,20 @@ public class ASTVisitor extends CminusBaseVisitor<Node> {
 //    }
 
     // TODO Uncomment and implement whatever methods make sense
-//    /**
-//     * {@inheritDoc}
-//     *
-//     * <p>The default implementation returns the result of calling
-//     * {@link #visitChildren} on {@code ctx}.</p>
-//     */
-//    @Override public T visitDeclaration(CminusParser.DeclarationContext ctx) { return visitChildren(ctx); }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override public Node visitDeclaration(CminusParser.DeclarationContext ctx) {
+        if (ctx.varDeclaration() != null){
+            return visit(ctx.varDeclaration());
+        } else if (ctx.funDeclaration() != null) {
+            return visit(ctx.funDeclaration());
+        }
+        return null;
+    }
 //    /**
 //     * {@inheritDoc}
 //     *
@@ -92,13 +97,31 @@ public class ASTVisitor extends CminusBaseVisitor<Node> {
 //     * {@link #visitChildren} on {@code ctx}.</p>
 //     */
 //    @Override public T visitVarDeclId(CminusParser.VarDeclIdContext ctx) { return visitChildren(ctx); }
-//    /**
-//     * {@inheritDoc}
-//     *
-//     * <p>The default implementation returns the result of calling
-//     * {@link #visitChildren} on {@code ctx}.</p>
-//     */
-//    @Override public T visitFunDeclaration(CminusParser.FunDeclarationContext ctx) { return visitChildren(ctx); }
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override public Node visitFunDeclaration(CminusParser.FunDeclarationContext ctx) {
+        VarType returnType = null;
+        if (ctx.typeSpecifier() != null) {
+            returnType = getVarType(ctx.typeSpecifier());
+        }
+
+        String id = ctx.ID().getText();
+
+        symbolTable.addSymbol(id, new SymbolInfo(id, returnType, true));
+
+        List<Declaration> params = new ArrayList<>();
+        for (CminusParser.ParamContext p : ctx.param()){
+            params.add((Declaration) visit(p));
+        }
+
+        Statement body = (Statement) visit(ctx.statement());
+
+        return new FunDeclaration(returnType, id, params, body);
+    }
 //    /**
 //     * {@inheritDoc}
 //     *
