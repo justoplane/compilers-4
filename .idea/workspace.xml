@@ -5,23 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f779c3f-c35a-48bf-a12e-874b5636af6e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/parser/Cminus.interp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/Cminus.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/CminusBaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/CminusBaseVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/CminusLexer.interp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/CminusLexer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/CminusLexer.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/CminusListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/CminusParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/CminusVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/Assign.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/Break.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/Call.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/CompoundStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/ExpressionStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/FunDeclaration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/IfStmt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/ParenExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/UnaryOperator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/UnaryPostOperator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submit/ast/WhileStmt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_showyourwork.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/_showyourwork.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/p4-formatter/_showyourwork.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/p4-formatter/_showyourwork.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/p4-formatter/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/p4-formatter/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/p4-formatter/submit/ASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/p4-formatter/submit/ASTVisitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/submit/ASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/submit/ASTVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
